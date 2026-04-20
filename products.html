@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<!-- This tells the browser it's an HTML5 document -->
+<html lang="en">
+<head>
+    <!-- Character encoding for supporting special characters like ₹ -->
+    <meta charset="UTF-8" />
+    <!-- Makes the page look good on phones and tablets -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!-- Title shown in the browser tab -->
+    <title>Shop Luxury Beds | DreamBeds</title>
+    <!-- Description for search engines (SEO) -->
+    <meta name="description" content="Explore our curated collection of handcrafted luxury beds. King, Queen, Modern & Wooden styles with free delivery across India.">
+    <!-- Google Fonts: Playfair Display for headings, DM Sans for body text -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+    <!-- Our main CSS file for all styling -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- HEADER: Contains the logo and navigation bar -->
+<!-- The header sticks to the top when scrolling -->
+<!-- ══════════════════════════════════════════ -->
+<header>
+    <!-- Logo: clicking it goes to the homepage -->
+    <a href="index.html" class="logo">Dream<span>Beds</span></a>
+    <!-- Navigation links: "active" class highlights the current page -->
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="products.html" class="active">Beds</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <!-- Cart button: shows the number of items in cart -->
+        <a href="cart.html" class="nav-cart">🛒 Cart (<span id="cart-count">0</span>)</a>
+    </nav>
+</header>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- HERO BANNER: Big image section at the top of the page -->
+<!-- Has a dark overlay on top of the background image -->
+<!-- ══════════════════════════════════════════ -->
+<section class="shop-hero">
+    <!-- Dark gradient overlay to make text readable on the image -->
+    <div class="shop-hero-overlay"></div>
+    <!-- Hero text content centered on the banner -->
+    <div class="shop-hero-content">
+        <span class="hero-badge">✦ Handcrafted Excellence</span>
+        <h1>Explore Our Luxury<br><em>Bed Collection</em></h1>
+        <p>Every piece is a masterwork — built for lasting comfort, timeless design, and the deep rest your body craves.</p>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- TRUST BAR: Shows 4 key benefits (delivery, warranty, etc.) -->
+<!-- Builds customer confidence before they shop -->
+<!-- ══════════════════════════════════════════ -->
+<div class="trust-bar">
+    <div class="trust-item"><span>🚚</span> Free Pan-India Delivery</div>
+    <div class="trust-item"><span>🛡️</span> 5-Year Master Warranty</div>
+    <div class="trust-item"><span>↩️</span> 100-Night Risk-Free Trial</div>
+    <div class="trust-item"><span>🔧</span> Free Assembly</div>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- FILTERS & SORT: Let users filter beds by category -->
+<!-- and sort them by price -->
+<!-- ══════════════════════════════════════════ -->
+<main class="shop-main">
+    <div class="shop-controls">
+        <!-- Filter buttons: data-filter attribute tells JS which category to show -->
+        <div class="filter-group">
+            <span class="filter-label">Category:</span>
+            <button class="filter-btn active" data-filter="all">All Beds</button>
+            <button class="filter-btn" data-filter="king">King Size</button>
+            <button class="filter-btn" data-filter="queen">Queen Size</button>
+            <button class="filter-btn" data-filter="modern">Modern</button>
+            <button class="filter-btn" data-filter="wooden">Wooden</button>
+        </div>
+        <!-- Sort dropdown: lets users sort by price low-to-high or high-to-low -->
+        <div class="sort-group">
+            <label for="sort-select">Sort by:</label>
+            <select id="sort-select">
+                <option value="featured">Featured</option>
+                <option value="low">Price: Low → High</option>
+                <option value="high">Price: High → Low</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!-- PRODUCTS GRID: This is where the bed cards appear -->
+    <!-- The cards are NOT written in HTML — they are -->
+    <!-- created dynamically by JavaScript below -->
+    <!-- ══════════════════════════════════════════ -->
+    <div class="products-grid" id="products-grid">
+        <!-- Products are injected here by JavaScript -->
+    </div>
+
+    <!-- EMPTY STATE: Shown when no beds match the selected filter -->
+    <div class="empty-state" id="empty-state" style="display:none;">
+        <p>No beds found in this category.</p>
+    </div>
+</main>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- PRODUCT DETAIL MODAL (Popup Window) -->
+<!-- When user clicks "View" on a product card, -->
+<!-- this popup slides in with full product details -->
+<!-- It is hidden by default and shown by JavaScript -->
+<!-- ══════════════════════════════════════════ -->
+<div class="modal-overlay" id="modal-overlay">
+    <div class="modal-card">
+        <!-- X button to close the popup -->
+        <button class="modal-close" id="modal-close">&times;</button>
+        <div class="modal-body">
+            <!-- Left side: Product image -->
+            <div class="modal-img">
+                <img id="modal-img" src="" alt="Product">
+            </div>
+            <!-- Right side: Product information -->
+            <div class="modal-info">
+                <span class="hero-badge" id="modal-tag"></span>
+                <h2 id="modal-name"></h2>
+                <p class="modal-desc" id="modal-desc"></p>
+                <!-- Material, Size, and Rating details -->
+                <div class="modal-meta">
+                    <div><span class="modal-label">Material</span><span id="modal-material"></span></div>
+                    <div><span class="modal-label">Size</span><span id="modal-size"></span></div>
+                    <div><span class="modal-label">Rating</span><span id="modal-rating"></span></div>
+                </div>
+                <!-- Price display -->
+                <div class="modal-price" id="modal-price"></div>
+                <!-- Action buttons: Add to Cart and Wishlist -->
+                <div class="modal-actions">
+                    <button class="btn-primary" id="modal-buy">Add to Cart</button>
+                    <button class="btn-outline" id="modal-wishlist">❤️ Wishlist</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- FOOTER: Bottom section with logo, copyright, and links -->
+<!-- ══════════════════════════════════════════ -->
+<footer>
+    <a href="index.html" class="logo">Dream<span>Beds</span></a>
+    <p>© 2026 DreamBeds. All rights reserved.</p>
+    <nav>
+        <a href="products.html">Beds</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="cart.html">Cart</a>
+    </nav>
+</footer>
+
+<!-- TOAST: Small popup message that appears at bottom of screen -->
+<!-- Used for messages like "Added to cart" or "Removed from wishlist" -->
+<div id="toast"></div>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- JAVASCRIPT: All the logic for this page -->
+<!-- Handles product display, filtering, sorting, -->
+<!-- cart system, wishlist, and modal popup -->
+<!-- ══════════════════════════════════════════ -->
+<script>
+// ═══════════════════════════════════════
+//  PRODUCT DATA — All 18 Luxury Beds
+//  Each bed has: id, name, price, category,
+//  tag (badge label), short desc, long desc,
+//  material, size, rating, and image path
+// ═══════════════════════════════════════
+const products = [
+    {
+        id: 1,
+        name: "Royal King Upholstered Bed",
+        price: 42000,
+        category: "king",
+        tag: "Best Seller",
+        desc: "Velvet-tufted headboard with solid teak frame — pure indulgence for your master suite.",
+        longDesc: "Handcrafted with premium Italian velvet upholstery, deep button-tufted headboard, and solid teak wood frame. Features 12-slat support system for optimal mattress ventilation. Gold-finish metal accents add a regal touch to any bedroom.",
+        material: "Teak + Velvet",
+        size: "King (78×72 in)",
+        rating: "4.9 ★",
+        img: "Royal.png"
+    },
+    {
+        id: 2,
+        name: "Modern Minimalist Platform Bed",
+        price: 18500,
+        category: "modern",
+        tag: "Popular",
+        desc: "Clean lines and low-profile elegance — designed for the contemporary bedroom.",
+        longDesc: "Sleek platform design with cushioned headboard and sturdy metal frame. No box spring needed. Linen upholstery in warm beige complements any modern decor style.",
+        material: "Metal + Linen",
+        size: "Queen (75×60 in)",
+        rating: "4.7 ★",
+        img: "ModernMinamilist.png"
+    },
+    {
+        id: 3,
+        name: "Solid Sheesham Carved Bed",
+        price: 35000,
+        category: "wooden",
+        tag: "Classic",
+        desc: "Traditional hand-carved Sheesham wood — built to last generations with timeless beauty.",
+        longDesc: "100% solid Sheesham wood construction with intricate hand-carved headboard details. Natural honey finish with protective lacquer coating. Includes under-bed storage drawers.",
+        material: "Solid Sheesham",
+        size: "King (78×72 in)",
+        rating: "4.8 ★",
+        img: "SolidSheesham.png"
+    },
+    {
+        id: 4,
+        name: "Luxe Velvet Wingback Bed",
+        price: 48000,
+        category: "king",
+        tag: "✦ Premium",
+        desc: "Sleek black velvet upholstered bed with LED backlight and built-in storage drawers.",
+        longDesc: "Stunning black velvet wingback design with ambient LED strip lighting along the headboard. Features two spacious pull-out storage drawers at the base. Channel-tufted headboard with curved contours adds a dramatic, modern touch to any master bedroom.",
+        material: "Pine + Velvet",
+        size: "King (78×72 in)",
+        rating: "5.0 ★",
+        img: "Velevet.jpg"
+    },
+    {
+        id: 5,
+        name: "Scandinavian Oak Frame Bed",
+        price: 22000,
+        category: "modern",
+        tag: "Trending",
+        desc: "Nordic-inspired simplicity with warm oak tones — less is more, beautifully.",
+        longDesc: "Inspired by Scandinavian design, this bed features clean geometric lines in natural white oak. Tapered legs and a slatted headboard create an airy, light-filled aesthetic.",
+        material: "White Oak",
+        size: "Queen (75×60 in)",
+        rating: "4.6 ★",
+        img: "SolidSheesham.png"
+    },
+    {
+        id: 6,
+        name: "Queen Storage Hydraulic Bed",
+        price: 28000,
+        category: "queen",
+        tag: "Space Saver",
+        desc: "Hydraulic lift mechanism with massive under-bed storage — smart luxury for modern living.",
+        longDesc: "Gas-lift hydraulic storage with 22 cubic feet of hidden space. Faux leather headboard is easy to clean. Heavy-duty steel frame supports up to 400 kg.",
+        material: "Steel + Leatherette",
+        size: "Queen (75×60 in)",
+        rating: "4.7 ★",
+        img: "QueesHydraulic.png"
+    },
+    {
+        id: 7,
+        name: "Walnut Four-Poster Bed",
+        price: 55000,
+        category: "wooden",
+        tag: "✦ Premium",
+        desc: "Majestic dark walnut four-poster canopy bed with elegant cane weave panels.",
+        longDesc: "Crafted from premium dark walnut wood with a full canopy four-poster frame. Features beautiful natural cane weave panels on the headboard and footboard, blending traditional craftsmanship with timeless elegance. Paired with matching bedside tables for a complete royal bedroom set.",
+        material: "Dark Walnut + Cane",
+        size: "King (78×72 in)",
+        rating: "4.9 ★",
+        img: "WoodPoster.jpg"
+    },
+    {
+        id: 8,
+        name: "Floating LED Panel Bed",
+        price: 32000,
+        category: "modern",
+        tag: "New Arrival",
+        desc: "Ambient LED under-glow with floating design — futuristic comfort meets artistry.",
+        longDesc: "Suspended base creates a stunning floating illusion. Built-in warm-white LED strip with touch dimmer. Upholstered in premium grey boucle fabric with memory foam headboard cushion.",
+        material: "MDF + Boucle",
+        size: "King (78×72 in)",
+        rating: "4.8 ★",
+        img: "FloatingLed.png"
+    },
+    {
+        id: 9,
+        name: "Victorian Rose Gold Bed",
+        price: 62000,
+        category: "king",
+        tag: "✦ Premium",
+        desc: "Rose gold metal frame with baroque-inspired curves — opulence redefined.",
+        longDesc: "Brushed rose gold metal frame with intricate scrollwork. Powder-coated for durability. Pairs beautifully with tufted mattresses and silk bedding. A true collector's piece.",
+        material: "Rose Gold Metal",
+        size: "King (78×72 in)",
+        rating: "5.0 ★",
+        img: "VictoriaRoseGOld.png"
+    },
+    {
+        id: 10,
+        name: "Rustic Mango Wood Bed",
+        price: 26000,
+        category: "wooden",
+        tag: "Artisan",
+        desc: "Solid mango wood platform bed with warm honey finish and matching bedside tables.",
+        longDesc: "Handcrafted from solid mango wood with a rich warm honey-toned finish that showcases the natural grain. Features a clean slatted headboard design with rounded pillar legs. Complete bedroom set includes matching nightstands with drawers. Styled with a bohemian kilim rug for an artisan-chic aesthetic.",
+        material: "Solid Mango Wood",
+        size: "Queen (75×60 in)",
+        rating: "4.5 ★",
+        img: "MangoWoord.jpg"
+    },
+    {
+        id: 11,
+        name: "Cloud Nine Queen Divan",
+        price: 15000,
+        category: "queen",
+        tag: "Value Pick",
+        desc: "Hotel-grade divan base with plush fabric — cloud-like comfort at an incredible price.",
+        longDesc: "Spring-loaded divan base with padded top. Wrapped in soft-touch microfibre fabric. Compact design fits perfectly in apartments and guest rooms. Includes 2 drawer storage.",
+        material: "Spring + Microfibre",
+        size: "Queen (75×60 in)",
+        rating: "4.4 ★",
+        img: "CloudNine.png"
+    },
+    {
+        id: 12,
+        name: "Emperor Teak Poster Bed",
+        price: 72000,
+        category: "king",
+        tag: "✦ Flagship",
+        desc: "Our finest creation — hand-carved Burma teak with gold-leaf accents. A legacy piece.",
+        longDesc: "The crown jewel of DreamBeds. Made from 100-year seasoned Burma teak with 24K gold-leaf detailing on headboard carvings. Each bed takes 45 days to craft by our master artisans.",
+        material: "Burma Teak + Gold Leaf",
+        size: "King (84×78 in)",
+        rating: "5.0 ★",
+        img: "EmperorTeak.png"
+    },
+    {
+        id: 13,
+        name: "Chesterfield Leather Bed",
+        price: 56000,
+        category: "king",
+        tag: "Luxury",
+        desc: "Deep-buttoned leather headboard with rolled arms — British elegance for the modern home.",
+        longDesc: "Inspired by classic Chesterfield design, this bed features premium full-grain cognac leather upholstery with deep diamond tufting. Solid hardwood frame with chrome-finish nail head trim. The rolled headboard provides excellent reading support.",
+        material: "Leather + Hardwood",
+        size: "King (78×72 in)",
+        rating: "4.8 ★",
+        img: "ClestifiedLeather.png"
+    },
+    {
+        id: 14,
+        name: "Japanese Tatami Low Bed",
+        price: 19500,
+        category: "modern",
+        tag: "Zen",
+        desc: "Ultra-low platform inspired by Japanese minimalism — grounded, calm, and serene.",
+        longDesc: "Authentic Japanese-inspired tatami-style platform bed sitting just 8 inches off the floor. Made from natural Paulownia wood with slatted base for breathability. Promotes healthy spine alignment and a Zen-like bedroom atmosphere.",
+        material: "Paulownia Wood",
+        size: "Queen (75×60 in)",
+        rating: "4.6 ★",
+        img: "Japanese.png"
+    },
+    {
+        id: 15,
+        name: "Ivory Canopy Drape Bed",
+        price: 44000,
+        category: "king",
+        tag: "Romantic",
+        desc: "Flowing sheer canopy drapes over a brass frame — dreamy romance meets luxury.",
+        longDesc: "Antique-finish brass metal frame with four slender posts designed for flowing sheer drapes (included). Ivory powder-coated finish resists tarnishing. Creates a fairy-tale bedroom centrepiece that's both romantic and regal.",
+        material: "Brass + Sheer Fabric",
+        size: "King (78×72 in)",
+        rating: "4.7 ★",
+        img: "Ivory.jpg"
+    },
+    {
+        id: 16,
+        name: "Rattan Cane Boho Bed",
+        price: 21000,
+        category: "modern",
+        tag: "Trending",
+        desc: "Natural rattan weave headboard with coastal boho vibes — breezy and beautiful.",
+        longDesc: "Handwoven natural rattan headboard mounted on a sturdy mango wood frame. Light natural finish brings warmth and texture to any room. Perfect for coastal, bohemian, or Scandinavian-inspired interiors.",
+        material: "Rattan + Mango Wood",
+        size: "Queen (75×60 in)",
+        rating: "4.5 ★",
+        img: "Rattan.png"
+    },
+    {
+        id: 17,
+        name: "Ottoman Storage King Bed",
+        price: 38000,
+        category: "king",
+        tag: "Space Saver",
+        desc: "Full-lift ottoman base reveals massive storage — hide everything in style.",
+        longDesc: "Gas-lift ottoman mechanism opens the entire sleeping surface to reveal a cavernous storage compartment. Upholstered in soft grey tweed fabric with a padded panel headboard. Heavy-duty steel hinges rated for 10,000+ cycles.",
+        material: "Steel + Tweed Fabric",
+        size: "King (78×72 in)",
+        rating: "4.7 ★",
+        img: "Ottoman.png"
+    },
+    {
+        id: 18,
+        name: "Antique Brass Frame Bed",
+        price: 34000,
+        category: "queen",
+        tag: "Heritage",
+        desc: "Vintage-inspired brushed brass frame with spindle details — old-world charm reimagined.",
+        longDesc: "Solid iron frame with a hand-applied antique brass patina finish. Elegant spindle detailing on headboard and footboard evokes Victorian-era grandeur. Each piece is slightly unique due to the artisanal finishing process.",
+        material: "Iron + Brass Finish",
+        size: "Queen (75×60 in)",
+        rating: "4.6 ★",
+        img: "Antique.jpg"
+    }
+];
+
+// ═══════════════════════════════════════
+//  CART SYSTEM (uses localStorage)
+//  localStorage saves data in the browser
+//  so the cart stays even after page refresh
+// ═══════════════════════════════════════
+
+// Load cart from localStorage, or start with empty array
+let cart = JSON.parse(localStorage.getItem('dreambedsCart')) || [];
+
+// Save the current cart array to localStorage
+function saveCart() {
+    localStorage.setItem('dreambedsCart', JSON.stringify(cart));
+}
+
+// Update the cart count number shown in the navbar
+function updateCartCount() {
+    const el = document.getElementById('cart-count');
+    if (el) el.textContent = cart.length;
+}
+
+// Add a bed to the cart when user clicks "Add to Cart"
+function addToCart(id) {
+    // Find the product by its ID
+    const product = products.find(p => p.id === id);
+    if (!product) return; // If not found, do nothing
+    // Push product name and price to cart array
+    cart.push({ name: product.name, price: product.price });
+    saveCart();        // Save to browser storage
+    updateCartCount(); // Update the number in navbar
+    showToast(`✓ "${product.name}" added to cart`); // Show success message
+}
+
+// ═══════════════════════════════════════
+//  WISHLIST SYSTEM (simple heart toggle)
+//  Stores wishlist IDs in localStorage
+//  Clicking heart adds/removes from wishlist
+// ═══════════════════════════════════════
+
+// Load wishlist from localStorage, or start empty
+let wishlist = JSON.parse(localStorage.getItem('dreambedsWish')) || [];
+
+// Toggle a product in/out of the wishlist
+function toggleWishlist(id) {
+    const idx = wishlist.indexOf(id); // Check if already in wishlist
+    if (idx > -1) {
+        // Already in wishlist — remove it
+        wishlist.splice(idx, 1);
+        showToast('Removed from wishlist');
+    } else {
+        // Not in wishlist — add it
+        wishlist.push(id);
+        showToast('❤️ Added to wishlist');
+    }
+    // Save updated wishlist to browser storage
+    localStorage.setItem('dreambedsWish', JSON.stringify(wishlist));
+    // Re-render products to update the heart icon color
+    renderProducts(currentFilter, currentSort);
+}
+
+// ═══════════════════════════════════════
+//  TOAST NOTIFICATION
+//  Shows a small popup message at the bottom
+//  of the screen that fades away after 2.4 seconds
+// ═══════════════════════════════════════
+function showToast(msg) {
+    const toast = document.getElementById('toast');
+    if (!toast) return;
+    toast.textContent = msg;  // Set the message text
+    // Make it visible by sliding it up
+    toast.style.opacity = '1';
+    toast.style.transform = 'translateX(-50%) translateY(0)';
+    // Clear any previous timer so messages don't overlap
+    clearTimeout(toast._timer);
+    // After 2.4 seconds, fade the toast away
+    toast._timer = setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateX(-50%) translateY(20px)';
+    }, 2400);
+}
+
+// ═══════════════════════════════════════
+//  RENDER PRODUCTS
+//  This is the MAIN function that displays
+//  all bed cards on the page. It also handles
+//  filtering by category and sorting by price.
+// ═══════════════════════════════════════
+
+// Track current filter and sort settings
+let currentFilter = 'all';    // 'all', 'king', 'queen', 'modern', 'wooden'
+let currentSort = 'featured'; // 'featured', 'low', 'high'
+
+function renderProducts(filter, sort) {
+    // Save current settings
+    currentFilter = filter;
+    currentSort = sort;
+    // Get the grid container and empty state elements
+    const grid = document.getElementById('products-grid');
+    const empty = document.getElementById('empty-state');
+
+    // STEP 1: Filter products by category
+    // If "all" is selected, show everything
+    // Otherwise, only show products matching the category
+    let filtered = filter === 'all'
+        ? [...products]  // Copy all products
+        : products.filter(p => p.category === filter);
+
+    // STEP 2: Sort the filtered products by price
+    if (sort === 'low') filtered.sort((a, b) => a.price - b.price);   // Low to High
+    if (sort === 'high') filtered.sort((a, b) => b.price - a.price);  // High to Low
+
+    // STEP 3: Handle empty state (no products match)
+    if (filtered.length === 0) {
+        grid.style.display = 'none';   // Hide the grid
+        empty.style.display = 'block'; // Show "no beds found" message
+        return;
+    }
+
+    grid.style.display = '';    // Show the grid
+    empty.style.display = 'none'; // Hide the empty message
+
+    // STEP 4: Build HTML for each product card
+    // Uses template literals (backtick strings) to create HTML dynamically
+    grid.innerHTML = filtered.map((p, i) => `
+        <!-- Each product card with staggered animation delay -->
+        <div class="product-card reveal" style="animation-delay:${i * 0.06}s">
+            <!-- Product image area with tag badge and wishlist heart -->
+            <div class="product-img">
+                <img src="${p.img}" alt="${p.name}" loading="lazy" />
+                <span class="product-tag">${p.tag}</span>
+                <!-- Heart button: filled red if wishlisted, empty white if not -->
+                <button class="wishlist-btn ${wishlist.includes(p.id) ? 'wishlisted' : ''}"
+                        onclick="event.stopPropagation(); toggleWishlist(${p.id})"
+                        title="Add to Wishlist">
+                    ${wishlist.includes(p.id) ? '❤️' : '🤍'}
+                </button>
+            </div>
+            <!-- Product details area -->
+            <div class="product-body">
+                <h3>${p.name}</h3>
+                <p class="product-desc">${p.desc}</p>
+                <div class="product-rating">${p.rating}</div>
+                <!-- Price and action buttons -->
+                <div class="product-footer">
+                    <span class="product-price">₹${p.price.toLocaleString('en-IN')}</span>
+                    <div class="product-actions">
+                        <!-- View button opens the detail modal popup -->
+                        <button class="btn-view" onclick="openModal(${p.id})">View</button>
+                        <!-- Add to Cart button -->
+                        <button class="btn-buy" onclick="addToCart(${p.id})">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `).join('');  // Join all cards into one big HTML string
+
+    // STEP 5: Trigger fade-in animation for each card
+    requestAnimationFrame(() => {
+        document.querySelectorAll('.product-card.reveal').forEach(el => {
+            el.classList.add('visible');
+        });
+    });
+}
+
+// ═══════════════════════════════════════
+//  MODAL (View Details Popup)
+//  Opens a big popup showing full details
+//  of a bed when user clicks "View" button
+// ═══════════════════════════════════════
+function openModal(id) {
+    // Find the product data by ID
+    const p = products.find(x => x.id === id);
+    if (!p) return; // If not found, do nothing
+
+    // Fill in the modal with product details
+    document.getElementById('modal-img').src = p.img;          // Set product image
+    document.getElementById('modal-img').alt = p.name;         // Set image alt text
+    document.getElementById('modal-tag').textContent = p.tag;  // Set badge text
+    document.getElementById('modal-name').textContent = p.name; // Set product name
+    document.getElementById('modal-desc').textContent = p.longDesc; // Set long description
+    document.getElementById('modal-material').textContent = p.material; // Set material
+    document.getElementById('modal-size').textContent = p.size;    // Set size
+    document.getElementById('modal-rating').textContent = p.rating; // Set rating
+    document.getElementById('modal-price').textContent = '₹' + p.price.toLocaleString('en-IN'); // Set price
+
+    // Set up the "Add to Cart" button inside the modal
+    document.getElementById('modal-buy').onclick = () => {
+        addToCart(id);
+    };
+    // Set up the "Wishlist" button inside the modal
+    document.getElementById('modal-wishlist').onclick = () => {
+        toggleWishlist(id);
+    };
+
+    // Show the modal by adding the 'open' class
+    document.getElementById('modal-overlay').classList.add('open');
+    // Prevent background from scrolling when modal is open
+    document.body.style.overflow = 'hidden';
+}
+
+// Close the modal popup
+function closeModal() {
+    document.getElementById('modal-overlay').classList.remove('open');
+    document.body.style.overflow = ''; // Re-enable background scrolling
+}
+
+// ═══════════════════════════════════════
+//  EVENT LISTENERS
+//  This code runs when the page finishes loading.
+//  It sets up all the interactive features:
+//  filters, sorting, modal controls, and scroll effects
+// ═══════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+    // Show the cart count and display all products on initial load
+    updateCartCount();
+    renderProducts('all', 'featured');
+
+    // FILTER BUTTONS: When a category button is clicked,
+    // remove 'active' from all buttons, add it to the clicked one,
+    // then re-render products with the selected category
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderProducts(btn.dataset.filter, currentSort);
+        });
+    });
+
+    // SORT DROPDOWN: When user selects a sort option,
+    // re-render products with the new sort order
+    document.getElementById('sort-select').addEventListener('change', (e) => {
+        renderProducts(currentFilter, e.target.value);
+    });
+
+    // MODAL CLOSE: Close popup when X button is clicked
+    document.getElementById('modal-close').addEventListener('click', closeModal);
+    // Also close when clicking the dark overlay behind the modal
+    document.getElementById('modal-overlay').addEventListener('click', (e) => {
+        if (e.target === e.currentTarget) closeModal();
+    });
+
+    // KEYBOARD: Close modal when pressing Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeModal();
+    });
+
+    // STICKY HEADER SHADOW: Add a shadow to the header
+    // when the user scrolls down (visual effect only)
+    window.addEventListener('scroll', () => {
+        const header = document.querySelector('header');
+        if (header) {
+            header.style.boxShadow = window.scrollY > 10
+                ? '0 4px 24px rgba(92,61,46,0.1)' // Shadow when scrolled
+                : 'none';                          // No shadow at top
+        }
+    });
+});
+</script>
+
+</body>
+</html>

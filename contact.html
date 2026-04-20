@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Contact Us | DreamBeds</title>
+    <meta name="description" content="Get in touch with DreamBeds. We're here to help you find your perfect luxury bed and create your dream bedroom.">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header>
+    <a href="index.html" class="logo">Dream<span>Beds</span></a>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="products.html">Beds</a>
+        <a href="about.html">About</a>
+        <a href="contact.html" class="active">Contact</a>
+        <a href="cart.html" class="nav-cart">🛒 Cart</a>
+    </nav>
+</header>
+
+<!-- ── HERO BANNER ── -->
+<section class="contact-hero">
+    <div class="contact-hero-overlay"></div>
+    <div class="contact-hero-content">
+        <span class="hero-badge">✦ We're Listening</span>
+        <h1>Get in Touch<br><em>With Us</em></h1>
+        <p>We're here to help you find your perfect comfort. Let's create your dream bedroom together.</p>
+    </div>
+</section>
+
+<!-- ── MAIN CONTENT ── -->
+<main class="contact-page-main">
+
+    <!-- ── FORM + INFO GRID ── -->
+    <div class="contact-page-grid">
+
+        <!-- ── Contact Form Card ── -->
+        <div class="contact-form-card reveal">
+            <div class="form-header">
+                <span class="section-label">Send a Message</span>
+                <h2>We'd love to hear<br>from you</h2>
+                <p>Fill out the form below and our sleep concierge team will get back to you within 24 hours.</p>
+            </div>
+
+            <form id="contact-form" novalidate>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="fullname">Full Name</label>
+                        <input type="text" id="fullname" placeholder="e.g. Vibhor Srivastava" required />
+                        <span class="form-error" id="err-name"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" placeholder="e.g. hello@dreambeds.in" required />
+                        <span class="form-error" id="err-email"></span>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" placeholder="e.g. 89601 36926" required />
+                        <span class="form-error" id="err-phone"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" placeholder="e.g. Custom bed inquiry" required />
+                        <span class="form-error" id="err-subject"></span>
+                    </div>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="message">Your Message</label>
+                    <textarea id="message" rows="5" placeholder="Tell us how we can help you..." required></textarea>
+                    <span class="form-error" id="err-message"></span>
+                </div>
+
+                <button type="submit" class="btn-primary form-submit">
+                    <span>Send Message</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </button>
+            </form>
+
+            <!-- Success message (hidden by default) -->
+            <div class="form-success" id="form-success">
+                <div class="success-icon">✓</div>
+                <h3>Thank You!</h3>
+                <p>We will contact you soon. Our team typically responds within 24 hours.</p>
+                <button class="btn-outline" onclick="resetForm()">Send Another Message</button>
+            </div>
+        </div>
+
+        <!-- ── Contact Info Sidebar ── -->
+        <div class="contact-info-sidebar reveal">
+            <div class="info-card">
+                <div class="info-icon">📍</div>
+                <div>
+                    <h4>Visit Our Studio</h4>
+                    <p>DreamBeds Design Studio,<br>Plot 42, Sector 62, Noida,<br>Uttar Pradesh 201301</p>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon">📞</div>
+                <div>
+                    <h4>Call Us</h4>
+                    <p><a href="tel:+918960136926">+91 89601 36926</a></p>
+                    <p><a href="tel:+911204567890">+91 120 456 7890</a></p>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon">✉️</div>
+                <div>
+                    <h4>Email Us</h4>
+                    <p><a href="mailto:vibhor1127@gmail.com">vibhor1127@gmail.com</a></p>
+                    <p><a href="mailto:support@dreambeds.in">support@dreambeds.in</a></p>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon">🕒</div>
+                <div>
+                    <h4>Working Hours</h4>
+                    <p>Mon – Sat: 10:00 AM – 7:00 PM</p>
+                    <p>Sunday: By Appointment Only</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- ── FOOTER ── -->
+<footer class="contact-footer">
+    <div class="footer-main">
+        <div class="footer-brand">
+            <a href="index.html" class="logo">Dream<span>Beds</span></a>
+            <p class="footer-tagline">Luxury Comfort Redefined</p>
+            <div class="footer-socials">
+                <a href="#" title="Instagram" class="social-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                </a>
+                <a href="#" title="Facebook" class="social-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                </a>
+                <a href="#" title="Twitter / X" class="social-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
+                </a>
+                <a href="#" title="Pinterest" class="social-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.24 2.65 7.85 6.39 9.28-.09-.78-.17-1.98.04-2.83.18-.77 1.2-5.08 1.2-5.08s-.31-.61-.31-1.52c0-1.42.82-2.48 1.85-2.48.87 0 1.29.65 1.29 1.44 0 .88-.56 2.19-.85 3.41-.24 1.02.51 1.85 1.52 1.85 1.82 0 3.22-1.92 3.22-4.69 0-2.45-1.76-4.16-4.28-4.16-2.91 0-4.62 2.18-4.62 4.44 0 .88.34 1.82.76 2.33a.3.3 0 0 1 .07.29l-.28 1.16c-.05.19-.15.23-.35.14-1.31-.61-2.13-2.52-2.13-4.06 0-3.31 2.41-6.35 6.94-6.35 3.64 0 6.47 2.6 6.47 6.07 0 3.62-2.28 6.53-5.45 6.53-1.06 0-2.07-.55-2.41-1.21l-.66 2.5c-.24.91-.88 2.05-1.32 2.75A12 12 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>
+                </a>
+            </div>
+        </div>
+        <div class="footer-links-group">
+            <h4>Quick Links</h4>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="products.html">Shop Beds</a>
+                <a href="about.html">Our Story</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
+        <div class="footer-links-group">
+            <h4>Support</h4>
+            <nav>
+                <a href="#">Shipping Policy</a>
+                <a href="#">Returns & Exchanges</a>
+                <a href="#">Warranty Info</a>
+                <a href="#">FAQ</a>
+            </nav>
+        </div>
+    </div>
+    <div class="footer-bottom-bar">
+        <p>© 2026 DreamBeds Luxury Interiors. Crafted with ❤️ in India.</p>
+    </div>
+</footer>
+
+<!-- ── TOAST ── -->
+<div id="toast"></div>
+
+<!-- ── JAVASCRIPT ── -->
+<script>
+// ═══════════════════════════════════════
+//  FORM VALIDATION & SUBMISSION
+// ═══════════════════════════════════════
+
+const form = document.getElementById('contact-form');
+const successDiv = document.getElementById('form-success');
+
+// Helper: show error
+function showError(id, msg) {
+    document.getElementById(id).textContent = msg;
+}
+
+// Helper: clear all errors
+function clearErrors() {
+    document.querySelectorAll('.form-error').forEach(el => el.textContent = '');
+    document.querySelectorAll('.form-group input, .form-group textarea').forEach(el => {
+        el.classList.remove('input-error');
+    });
+}
+
+// Validate email format
+function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+// Validate phone (only digits, 10+ chars)
+function isValidPhone(phone) {
+    const cleaned = phone.replace(/[\s\-]/g, '');
+    return /^\d{10,}$/.test(cleaned);
+}
+
+// Form submit handler
+form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    clearErrors();
+
+    const name = document.getElementById('fullname');
+    const email = document.getElementById('email');
+    const phone = document.getElementById('phone');
+    const subject = document.getElementById('subject');
+    const message = document.getElementById('message');
+
+    let isValid = true;
+
+    // Name validation
+    if (!name.value.trim()) {
+        showError('err-name', 'Please enter your name');
+        name.classList.add('input-error');
+        isValid = false;
+    }
+
+    // Email validation
+    if (!email.value.trim()) {
+        showError('err-email', 'Please enter your email');
+        email.classList.add('input-error');
+        isValid = false;
+    } else if (!isValidEmail(email.value)) {
+        showError('err-email', 'Please enter a valid email');
+        email.classList.add('input-error');
+        isValid = false;
+    }
+
+    // Phone validation
+    if (!phone.value.trim()) {
+        showError('err-phone', 'Please enter your phone number');
+        phone.classList.add('input-error');
+        isValid = false;
+    } else if (!isValidPhone(phone.value)) {
+        showError('err-phone', 'Please enter a valid phone number');
+        phone.classList.add('input-error');
+        isValid = false;
+    }
+
+    // Subject validation
+    if (!subject.value.trim()) {
+        showError('err-subject', 'Please enter a subject');
+        subject.classList.add('input-error');
+        isValid = false;
+    }
+
+    // Message validation
+    if (!message.value.trim()) {
+        showError('err-message', 'Please enter your message');
+        message.classList.add('input-error');
+        isValid = false;
+    }
+
+    // If all valid — show success
+    if (isValid) {
+        form.style.display = 'none';
+        document.querySelector('.form-header').style.display = 'none';
+        successDiv.style.display = 'flex';
+        showToast('✓ Message sent successfully!');
+    }
+});
+
+// Reset form to send another message
+function resetForm() {
+    form.reset();
+    clearErrors();
+    form.style.display = '';
+    document.querySelector('.form-header').style.display = '';
+    successDiv.style.display = 'none';
+}
+
+// Toast notification
+function showToast(msg) {
+    const toast = document.getElementById('toast');
+    if (!toast) return;
+    toast.textContent = msg;
+    toast.style.opacity = '1';
+    toast.style.transform = 'translateX(-50%) translateY(0)';
+    clearTimeout(toast._timer);
+    toast._timer = setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateX(-50%) translateY(20px)';
+    }, 2400);
+}
+
+// ═══════════════════════════════════════
+//  SCROLL REVEAL & HEADER SHADOW
+// ═══════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+    // Reveal animations
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, i) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => entry.target.classList.add('visible'), i * 100);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+
+    // Sticky header shadow
+    window.addEventListener('scroll', () => {
+        const header = document.querySelector('header');
+        if (header) {
+            header.style.boxShadow = window.scrollY > 10
+                ? '0 4px 24px rgba(92,61,46,0.1)'
+                : 'none';
+        }
+    });
+});
+</script>
+
+</body>
+</html>

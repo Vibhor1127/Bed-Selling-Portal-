@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DreamBeds – Sleep Better, Live Better</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --cream: #faf7f2;
+      --warm: #f0e9de;
+      --brown: #5c3d2e;
+      --gold: #c9a84c;
+      --dark: #1a1208;
+      --text: #3d2b1f;
+      --muted: #8c7b6e;
+      --white: #ffffff;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 60px;
+      background: rgba(250,247,242,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201,168,76,0.2);
+      transition: box-shadow 0.3s;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--brown);
+      letter-spacing: 0.02em;
+      text-decoration: none;
+    }
+
+    .logo span { color: var(--gold); }
+
+    nav { display: flex; gap: 34px; align-items: center; }
+
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      position: relative;
+      transition: color 0.2s;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0;
+      width: 0; height: 1.5px;
+      background: var(--gold);
+      transition: width 0.25s;
+    }
+
+    nav a:hover { color: var(--gold); }
+    nav a:hover::after { width: 100%; }
+
+    .nav-cart {
+      background: var(--brown);
+      color: var(--white) !important;
+      padding: 9px 22px;
+      border-radius: 30px;
+      font-size: 0.85rem !important;
+    }
+
+    .nav-cart::after { display: none !important; }
+    .nav-cart:hover { background: var(--gold); color: var(--white) !important; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding-top: 80px;
+      overflow: hidden;
+    }
+
+    .hero-text {
+      padding: 80px 60px 80px 80px;
+      animation: fadeUp 0.9s ease both;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(201,168,76,0.15);
+      color: var(--gold);
+      border: 1px solid rgba(201,168,76,0.4);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .hero-text h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 5vw, 4.4rem);
+      font-weight: 700;
+      line-height: 1.12;
+      color: var(--dark);
+      margin-bottom: 22px;
+    }
+
+    .hero-text h1 em {
+      font-style: italic;
+      color: var(--brown);
+    }
+
+    .hero-text p {
+      font-size: 1.05rem;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 440px;
+      margin-bottom: 40px;
+    }
+
+    .hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; }
+
+    .btn-primary {
+      background: var(--brown);
+      color: var(--white);
+      padding: 14px 34px;
+      border-radius: 40px;
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      transition: background 0.25s, transform 0.2s;
+      display: inline-block;
+    }
+
+    .btn-primary:hover { background: var(--gold); transform: translateY(-2px); }
+
+    .btn-outline {
+      border: 1.5px solid var(--brown);
+      color: var(--brown);
+      padding: 14px 34px;
+      border-radius: 40px;
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 500;
+      transition: all 0.25s;
+      display: inline-block;
+    }
+
+    .btn-outline:hover {
+      background: var(--brown);
+      color: var(--white);
+      transform: translateY(-2px);
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 40px;
+      margin-top: 52px;
+      padding-top: 32px;
+      border-top: 1px solid rgba(92,61,46,0.12);
+    }
+
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--brown);
+    }
+
+    .stat-label {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 2px;
+      letter-spacing: 0.04em;
+    }
+
+    .hero-image {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+      animation: fadeIn 1.2s ease both 0.3s;
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-image::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, var(--cream) 0%, transparent 25%);
+      z-index: 1;
+    }
+
+    .hero-float-card {
+      position: absolute;
+      bottom: 60px;
+      left: 30px;
+      z-index: 2;
+      background: var(--white);
+      border-radius: 16px;
+      padding: 18px 24px;
+      box-shadow: 0 20px 60px rgba(92,61,46,0.15);
+      min-width: 200px;
+      animation: floatCard 4s ease-in-out infinite;
+    }
+
+    .hero-float-card .card-title {
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .hero-float-card .card-val {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: var(--brown);
+      font-weight: 700;
+    }
+
+    .hero-float-card .card-sub {
+      font-size: 0.78rem;
+      color: var(--gold);
+      margin-top: 4px;
+    }
+
+    /* ── TRUST BAR ── */
+    .trust-bar {
+      background: var(--brown);
+      padding: 18px 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 60px;
+      flex-wrap: wrap;
+    }
+
+    .trust-item {
+      color: rgba(255,255,255,0.8);
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .trust-item span { color: var(--gold); font-size: 1rem; }
+
+    /* ── FEATURED ── */
+    .featured {
+      padding: 90px 80px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 48px;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      color: var(--gold);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--dark);
+      line-height: 1.2;
+    }
+
+    .section-link {
+      color: var(--brown);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      border-bottom: 1px solid var(--brown);
+      padding-bottom: 2px;
+      transition: color 0.2s;
+    }
+
+    .section-link:hover { color: var(--gold); border-color: var(--gold); }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .card {
+      background: var(--white);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(92,61,46,0.07);
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 50px rgba(92,61,46,0.14);
+    }
+
+    .card-img {
+      position: relative;
+      height: 220px;
+      overflow: hidden;
+    }
+
+    .card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+
+    .card:hover .card-img img { transform: scale(1.07); }
+
+    .card-tag {
+      position: absolute;
+      top: 14px; left: 14px;
+      background: var(--white);
+      color: var(--brown);
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 20px;
+      letter-spacing: 0.04em;
+    }
+
+    .card-body { padding: 22px; }
+
+    .card-body h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 6px;
+    }
+
+    .card-body .desc {
+      font-size: 0.83rem;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .price {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--brown);
+    }
+
+    .btn-add {
+      background: var(--cream);
+      border: 1.5px solid var(--brown);
+      color: var(--brown);
+      font-size: 0.82rem;
+      font-weight: 500;
+      padding: 8px 18px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .btn-add:hover { background: var(--brown); color: var(--white); }
+
+    /* ── WHY US ── */
+    .why-us {
+      padding: 80px;
+      background: var(--warm);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .why-image {
+      border-radius: 24px;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+    }
+
+    .why-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .why-content .section-label { margin-bottom: 10px; }
+
+    .why-content .section-title { margin-bottom: 20px; font-size: 2rem; }
+
+    .why-content p {
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 0.95rem;
+      margin-bottom: 36px;
+    }
+
+    .features-list {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: var(--white);
+      border-radius: 14px;
+      padding: 16px 20px;
+      box-shadow: 0 2px 12px rgba(92,61,46,0.06);
+    }
+
+    .feature-icon {
+      width: 42px; height: 42px;
+      border-radius: 12px;
+      background: rgba(201,168,76,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .feature-text h4 {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 2px;
+    }
+
+    .feature-text p {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin: 0;
+      line-height: 1.4;
+    }
+
+    /* ── TESTIMONIAL ── */
+    .testimonial {
+      padding: 90px 80px;
+      text-align: center;
+    }
+
+    .testimonial .section-label { margin-bottom: 12px; }
+    .testimonial .section-title { margin-bottom: 60px; }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .tcard {
+      background: var(--white);
+      border-radius: 18px;
+      padding: 30px;
+      box-shadow: 0 4px 20px rgba(92,61,46,0.06);
+      text-align: left;
+    }
+
+    .tcard .stars { color: var(--gold); font-size: 0.95rem; letter-spacing: 2px; margin-bottom: 14px; }
+
+    .tcard p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.7;
+      font-style: italic;
+      margin-bottom: 20px;
+    }
+
+    .tcard .author {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--brown);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      color: rgba(255,255,255,0.6);
+      padding: 40px 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    footer .logo { color: var(--white); }
+
+    footer p { font-size: 0.82rem; }
+
+    footer nav { gap: 24px; }
+
+    footer nav a {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.82rem;
+    }
+
+    footer nav a:hover { color: var(--gold); }
+    footer nav a::after { background: var(--gold); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    @keyframes floatCard {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-10px); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      header { padding: 16px 24px; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-image { height: 340px; }
+      .hero-text { padding: 60px 24px 40px; }
+      .featured, .testimonial { padding: 60px 24px; }
+      .cards-grid, .testimonials-grid { grid-template-columns: 1fr; }
+      .why-us { grid-template-columns: 1fr; padding: 60px 24px; gap: 40px; }
+      .trust-bar { padding: 16px 24px; gap: 24px; }
+      footer { padding: 28px 24px; flex-direction: column; text-align: center; }
+      .section-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a href="index.html" class="logo">Dream<span>Beds</span></a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="products.html">Beds</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="cart.html" class="nav-cart">🛒 Cart</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-badge">✦ New 2026 Collection</div>
+    <h1>Sleep Like You <em>Deserve</em> To</h1>
+    <p>Handcrafted beds built for lasting comfort, timeless design, and the deep rest your body craves every night.</p>
+    <div class="hero-buttons">
+      <a href="products.html" class="btn-primary">Shop Collection</a>
+      <a href="about.html" class="btn-outline">Our Story</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">4800+</div>
+        <div class="stat-label">Happy Customers</div>
+      </div>
+      <div>
+        <div class="stat-num">120+</div>
+        <div class="stat-label">Bed Styles</div>
+      </div>
+      <div>
+        <div class="stat-num">5 ★</div>
+        <div class="stat-label">Average Rating</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-image">
+    <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=900&q=80" alt="Luxury bedroom" />
+    <div class="hero-float-card">
+      <div class="card-title">Best Seller</div>
+      <div class="card-val">Luxe Oak Bed</div>
+      <div class="card-sub">Starting ₹28,000 →</div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item"><span>🚚</span> Free Delivery Pan India</div>
+  <div class="trust-item"><span>🛡️</span> 5-Year Warranty</div>
+  <div class="trust-item"><span>↩️</span> 30-Day Returns</div>
+  <div class="trust-item"><span>🔧</span> Free Assembly</div>
+</div>
+
+<!-- FEATURED BEDS -->
+<section class="featured">
+  <div class="section-header">
+    <div>
+      <div class="section-label">✦ Handpicked For You</div>
+      <h2 class="section-title">Featured Beds</h2>
+    </div>
+    <a href="products.html" class="section-link">View All →</a>
+  </div>
+
+  <div class="cards-grid">
+    <div class="card reveal">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&q=80" alt="Modern Bed" />
+        <span class="card-tag">Popular</span>
+      </div>
+      <div class="card-body">
+        <h3>Modern Minimalist Bed</h3>
+        <p class="desc">Clean lines, upholstered headboard, and a sturdy metal frame for a contemporary bedroom.</p>
+        <div class="card-footer">
+          <span class="price">₹15,000</span>
+          <button class="btn-add" onclick="addToCart('Modern Minimalist Bed')">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=600&q=80" alt="Wooden Bed" />
+        <span class="card-tag">Classic</span>
+      </div>
+      <div class="card-body">
+        <h3>Solid Sheesham Wooden Bed</h3>
+        <p class="desc">Natural wood grain finish, hand-carved details, and built to last generations.</p>
+        <div class="card-footer">
+          <span class="price">₹22,000</span>
+          <button class="btn-add" onclick="addToCart('Solid Sheesham Wooden Bed')">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&q=80" alt="Luxury Bed" />
+        <span class="card-tag">✦ Premium</span>
+      </div>
+      <div class="card-body">
+        <h3>Royal Tufted Luxury Bed</h3>
+        <p class="desc">Velvet-upholstered tufted headboard with gold legs — pure indulgence for your bedroom.</p>
+        <div class="card-footer">
+          <span class="price">₹35,000</span>
+          <button class="btn-add" onclick="addToCart('Royal Tufted Luxury Bed')">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why-us">
+  <div class="why-image reveal">
+    <img src="https://images.unsplash.com/photo-1540518614846-7eded433c457?w=700&q=80" alt="Bedroom quality" />
+  </div>
+  <div class="why-content reveal">
+    <div class="section-label">✦ Why DreamBeds</div>
+    <h2 class="section-title">Crafted With Care, Built to Last</h2>
+    <p>Every bed we make is tested for comfort and durability before it reaches your home. We use sustainably sourced wood and premium fabrics — because you deserve the best.</p>
+    <div class="features-list">
+      <div class="feature-item">
+        <div class="feature-icon">🌿</div>
+        <div class="feature-text">
+          <h4>Eco-Friendly Materials</h4>
+          <p>Sustainably sourced wood and non-toxic finishes</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">🔨</div>
+        <div class="feature-text">
+          <h4>Expert Craftsmanship</h4>
+          <p>Hand-assembled by skilled artisans with 10+ years experience</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">🛏️</div>
+        <div class="feature-text">
+          <h4>Custom Sizes Available</h4>
+          <p>Single, Queen, King — or order a custom size just for you</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonial">
+  <div class="section-label">✦ Customer Love</div>
+  <h2 class="section-title">What Our Customers Say</h2>
+  <div class="testimonials-grid">
+    <div class="tcard reveal">
+      <div class="stars">★★★★★</div>
+      <p>"I ordered the Sheesham wooden bed and it looks even better in person. Assembly was super easy and the delivery was on time!"</p>
+      <div class="author">— Priya M., Mumbai</div>
+    </div>
+    <div class="tcard reveal">
+      <div class="stars">★★★★★</div>
+      <p>"The luxury bed transformed our bedroom completely. It feels like sleeping in a hotel every single night. 100% worth it."</p>
+      <div class="author">— Rahul K., Bengaluru</div>
+    </div>
+    <div class="tcard reveal">
+      <div class="stars">★★★★★</div>
+      <p>"Great quality at this price point. I bought the modern bed for my flat and my guests always compliment it. Love DreamBeds!"</p>
+      <div class="author">— Sneha T., Pune</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="index.html" class="logo">Dream<span>Beds</span></a>
+  <p>© 2026 DreamBeds. All rights reserved.</p>
+  <nav>
+    <a href="products.html">Beds</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="cart.html">Cart</a>
+  </nav>
+</footer>
+
+<!-- TOAST NOTIFICATION -->
+<div id="toast" style="
+  position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(20px);
+  background: var(--brown); color: white; padding: 12px 26px; border-radius: 30px;
+  font-size: 0.88rem; font-family: 'DM Sans', sans-serif;
+  opacity: 0; transition: all 0.3s ease; z-index: 999; pointer-events: none;
+  box-shadow: 0 8px 30px rgba(92,61,46,0.3);
+"></div>
+
+<script>
+  // Cart
+  let cart = [];
+
+  function addToCart(item) {
+    cart.push(item);
+    showToast(`✓ "${item}" added to cart`);
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.style.opacity = '1';
+    t.style.transform = 'translateX(-50%) translateY(0)';
+    setTimeout(() => {
+      t.style.opacity = '0';
+      t.style.transform = 'translateX(-50%) translateY(20px)';
+    }, 2400);
+  }
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 100);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(r => obs.observe(r));
+</script>
+</body>
+</html>

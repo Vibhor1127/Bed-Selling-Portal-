@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Checkout | DreamBeds</title>
+    <meta name="description" content="Complete your DreamBeds purchase securely. Luxury comfort is just one step away.">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header>
+    <a href="index.html" class="logo">Dream<span>Beds</span></a>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="products.html">Beds</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="cart.html" class="nav-cart">🛒 Cart</a>
+    </nav>
+</header>
+
+<!-- ── HERO BANNER ── -->
+<section class="checkout-hero">
+    <div class="checkout-hero-overlay"></div>
+    <div class="checkout-hero-content">
+        <span class="hero-badge">✦ Final Step</span>
+        <h1>Secure<br><em>Checkout</em></h1>
+        <p>Complete your purchase and enjoy luxury comfort.</p>
+    </div>
+</section>
+
+<!-- ── PROGRESS INDICATOR ── -->
+<div class="checkout-progress">
+    <div class="progress-step done">
+        <div class="step-circle">✓</div>
+        <span>Cart</span>
+    </div>
+    <div class="progress-line done"></div>
+    <div class="progress-step active">
+        <div class="step-circle">2</div>
+        <span>Checkout</span>
+    </div>
+    <div class="progress-line"></div>
+    <div class="progress-step">
+        <div class="step-circle">3</div>
+        <span>Confirmed</span>
+    </div>
+</div>
+
+<!-- ── MAIN CHECKOUT ── -->
+<main class="checkout-main" id="checkout-main">
+    <div class="checkout-grid">
+
+        <!-- ═══ LEFT: Billing Form ═══ -->
+        <div class="checkout-form-section">
+
+            <!-- Billing / Shipping Details -->
+            <div class="checkout-card">
+                <h2>Billing & Shipping Details</h2>
+                <form id="checkout-form" novalidate>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="co-name">Full Name</label>
+                            <input type="text" id="co-name" placeholder="e.g. Vibhor Srivastava" required />
+                            <span class="form-error" id="co-err-name"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="co-email">Email Address</label>
+                            <input type="email" id="co-email" placeholder="e.g. vibhor@dreambeds.in" required />
+                            <span class="form-error" id="co-err-email"></span>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="co-phone">Phone Number</label>
+                            <input type="tel" id="co-phone" placeholder="e.g. 89601 36926" required />
+                            <span class="form-error" id="co-err-phone"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="co-zip">ZIP Code</label>
+                            <input type="text" id="co-zip" placeholder="e.g. 201301" required />
+                            <span class="form-error" id="co-err-zip"></span>
+                        </div>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="co-address">Address Line</label>
+                        <input type="text" id="co-address" placeholder="e.g. Plot 42, Sector 62" required />
+                        <span class="form-error" id="co-err-address"></span>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="co-city">City</label>
+                            <input type="text" id="co-city" placeholder="e.g. Noida" required />
+                            <span class="form-error" id="co-err-city"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="co-state">State</label>
+                            <input type="text" id="co-state" placeholder="e.g. Uttar Pradesh" required />
+                            <span class="form-error" id="co-err-state"></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Payment Section -->
+            <div class="checkout-card">
+                <h2>Payment Method</h2>
+                <div class="payment-options">
+                    <label class="payment-option selected">
+                        <input type="radio" name="payment" value="cod" checked />
+                        <div class="payment-radio"></div>
+                        <span class="pay-icon">💵</span>
+                        <span>Cash on Delivery</span>
+                    </label>
+                    <label class="payment-option">
+                        <input type="radio" name="payment" value="card" />
+                        <div class="payment-radio"></div>
+                        <span class="pay-icon">💳</span>
+                        <span>Credit / Debit Card</span>
+                    </label>
+                    <label class="payment-option">
+                        <input type="radio" name="payment" value="upi" />
+                        <div class="payment-radio"></div>
+                        <span class="pay-icon">📱</span>
+                        <span>UPI Payment</span>
+                    </label>
+                </div>
+
+                <!-- Card Details (shown only when card selected) -->
+                <div class="card-fields" id="card-fields" style="display:none;">
+                    <div class="form-group full-width">
+                        <label for="card-number">Card Number</label>
+                        <input type="text" id="card-number" placeholder="1234  5678  9012  3456" maxlength="19" />
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="card-expiry">Expiry Date</label>
+                            <input type="text" id="card-expiry" placeholder="MM / YY" maxlength="7" />
+                        </div>
+                        <div class="form-group">
+                            <label for="card-cvv">CVV</label>
+                            <input type="password" id="card-cvv" placeholder="•••" maxlength="4" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- UPI field (shown only when UPI selected) -->
+                <div class="upi-field" id="upi-field" style="display:none;">
+                    <div class="form-group full-width">
+                        <label for="upi-id">UPI ID</label>
+                        <input type="text" id="upi-id" placeholder="e.g. vibhor@upi" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Place Order Button -->
+            <div class="checkout-card place-order-card">
+                <div class="trust-message">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    <span>Secure and safe checkout experience. Your data is protected.</span>
+                </div>
+                <button type="button" class="btn-primary place-order-btn" id="place-order-btn">
+                    <span>Place Order</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- ═══ RIGHT: Order Summary ═══ -->
+        <div class="checkout-summary">
+            <div class="checkout-card sticky-summary">
+                <h2>Order Summary</h2>
+                <div id="co-items-list" class="co-items-list">
+                    <!-- Items rendered by JS -->
+                </div>
+                <div class="summary-rows">
+                    <div class="summary-row">
+                        <span>Subtotal</span>
+                        <span id="co-subtotal">₹0</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Delivery</span>
+                        <span class="delivery-free">FREE</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Estimated Tax (5%)</span>
+                        <span id="co-tax">₹0</span>
+                    </div>
+                    <div class="summary-divider"></div>
+                    <div class="summary-row total-row">
+                        <span>Total</span>
+                        <span id="co-total">₹0</span>
+                    </div>
+                </div>
+                <a href="cart.html" class="continue-link">← Back to Cart</a>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- ── ORDER CONFIRMED (hidden by default) ── -->
+<section class="order-confirmed" id="order-confirmed" style="display:none;">
+    <div class="confirmed-content">
+        <div class="confirmed-icon">🎉</div>
+        <h1>Order Placed Successfully!</h1>
+        <p>Thank you for choosing DreamBeds. Your luxury comfort is on its way.</p>
+        <div class="confirmed-details" id="confirmed-details">
+            <!-- Filled by JS -->
+        </div>
+        <div class="confirmed-actions">
+            <a href="products.html" class="btn-primary">Continue Shopping</a>
+            <a href="index.html" class="btn-outline">Back to Home</a>
+        </div>
+    </div>
+
+    <!-- Updated Progress -->
+    <div class="checkout-progress confirmed-progress">
+        <div class="progress-step done"><div class="step-circle">✓</div><span>Cart</span></div>
+        <div class="progress-line done"></div>
+        <div class="progress-step done"><div class="step-circle">✓</div><span>Checkout</span></div>
+        <div class="progress-line done"></div>
+        <div class="progress-step done"><div class="step-circle">✓</div><span>Confirmed</span></div>
+    </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+    <a href="index.html" class="logo">Dream<span>Beds</span></a>
+    <p>© 2026 DreamBeds. All rights reserved.</p>
+    <nav>
+        <a href="products.html">Beds</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="cart.html">Cart</a>
+    </nav>
+</footer>
+
+<!-- ── TOAST ── -->
+<div id="toast"></div>
+
+<!-- ── JAVASCRIPT ── -->
+<script>
+// ═══════════════════════════════════════
+//  PRODUCT IMAGE MAP
+// ═══════════════════════════════════════
+const productImages = {
+    "Royal King Upholstered Bed": "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=120&q=80",
+    "Modern Minimalist Platform Bed": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=120&q=80",
+    "Solid Sheesham Carved Bed": "https://images.unsplash.com/photo-1540518614846-7eded433c457?w=120&q=80",
+    "Luxe Velvet Wingback Bed": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=120&q=80",
+    "Scandinavian Oak Frame Bed": "https://images.unsplash.com/photo-1616627561950-9f746e330187?w=120&q=80",
+    "Queen Storage Hydraulic Bed": "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=120&q=80",
+    "Walnut Four-Poster Bed": "https://images.unsplash.com/photo-1600585152220-90363fe7e115?w=120&q=80",
+    "Floating LED Panel Bed": "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=120&q=80",
+    "Victorian Rose Gold Bed": "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=120&q=80",
+    "Rustic Mango Wood Bed": "https://images.unsplash.com/photo-1551298370-9d3d53740c72?w=120&q=80",
+    "Cloud Nine Queen Divan": "https://images.unsplash.com/photo-1609766857041-ed402ea8069a?w=120&q=80",
+    "Emperor Teak Poster Bed": "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=120&q=80"
+};
+const defaultImg = "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=120&q=80";
+
+// ═══════════════════════════════════════
+//  LOAD CART DATA
+// ═══════════════════════════════════════
+function getCart() {
+    const raw = JSON.parse(localStorage.getItem('dreambedsCart')) || [];
+    const merged = {};
+    raw.forEach(item => {
+        if (merged[item.name]) {
+            merged[item.name].qty += 1;
+        } else {
+            merged[item.name] = { name: item.name, price: item.price, qty: 1 };
+        }
+    });
+    return Object.values(merged);
+}
+
+// ═══════════════════════════════════════
+//  RENDER ORDER SUMMARY
+// ═══════════════════════════════════════
+function renderSummary() {
+    const items = getCart();
+    const listEl = document.getElementById('co-items-list');
+
+    // If cart empty, redirect to cart page
+    if (items.length === 0) {
+        listEl.innerHTML = '<p class="empty-notice">No items in cart. <a href="products.html">Shop now →</a></p>';
+    }
+
+    // Render items
+    listEl.innerHTML = items.map(item => `
+        <div class="co-item">
+            <img src="${productImages[item.name] || defaultImg}" alt="${item.name}" />
+            <div class="co-item-info">
+                <h4>${item.name}</h4>
+                <p>Qty: ${item.qty} × ₹${item.price.toLocaleString('en-IN')}</p>
+            </div>
+            <span class="co-item-total">₹${(item.price * item.qty).toLocaleString('en-IN')}</span>
+        </div>
+    `).join('');
+
+    // Calculate totals
+    const subtotal = items.reduce((s, i) => s + (i.price * i.qty), 0);
+    const tax = Math.round(subtotal * 0.05);
+    const total = subtotal + tax;
+
+    document.getElementById('co-subtotal').textContent = '₹' + subtotal.toLocaleString('en-IN');
+    document.getElementById('co-tax').textContent = '₹' + tax.toLocaleString('en-IN');
+    document.getElementById('co-total').textContent = '₹' + total.toLocaleString('en-IN');
+}
+
+// ═══════════════════════════════════════
+//  PAYMENT METHOD TOGGLE
+// ═══════════════════════════════════════
+function setupPaymentToggle() {
+    const radios = document.querySelectorAll('input[name="payment"]');
+    const cardFields = document.getElementById('card-fields');
+    const upiField = document.getElementById('upi-field');
+
+    radios.forEach(radio => {
+        radio.addEventListener('change', () => {
+            // Update selected style
+            document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('selected'));
+            radio.closest('.payment-option').classList.add('selected');
+
+            // Toggle fields
+            cardFields.style.display = radio.value === 'card' ? 'block' : 'none';
+            upiField.style.display = radio.value === 'upi' ? 'block' : 'none';
+        });
+    });
+}
+
+// ═══════════════════════════════════════
+//  FORM VALIDATION
+// ═══════════════════════════════════════
+function validateForm() {
+    let valid = true;
+    // Clear errors
+    document.querySelectorAll('.form-error').forEach(e => e.textContent = '');
+    document.querySelectorAll('.form-group input').forEach(e => e.classList.remove('input-error'));
+
+    const fields = [
+        { id: 'co-name', err: 'co-err-name', msg: 'Please enter your name' },
+        { id: 'co-address', err: 'co-err-address', msg: 'Please enter your address' },
+        { id: 'co-city', err: 'co-err-city', msg: 'Please enter your city' },
+        { id: 'co-state', err: 'co-err-state', msg: 'Please enter your state' },
+        { id: 'co-zip', err: 'co-err-zip', msg: 'Please enter ZIP code' },
+    ];
+
+    fields.forEach(f => {
+        const el = document.getElementById(f.id);
+        if (!el.value.trim()) {
+            document.getElementById(f.err).textContent = f.msg;
+            el.classList.add('input-error');
+            valid = false;
+        }
+    });
+
+    // Email
+    const email = document.getElementById('co-email');
+    if (!email.value.trim()) {
+        document.getElementById('co-err-email').textContent = 'Please enter your email';
+        email.classList.add('input-error');
+        valid = false;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
+        document.getElementById('co-err-email').textContent = 'Please enter a valid email';
+        email.classList.add('input-error');
+        valid = false;
+    }
+
+    // Phone
+    const phone = document.getElementById('co-phone');
+    const cleaned = phone.value.replace(/[\s\-]/g, '');
+    if (!cleaned) {
+        document.getElementById('co-err-phone').textContent = 'Please enter your phone';
+        phone.classList.add('input-error');
+        valid = false;
+    } else if (!/^\d{10,}$/.test(cleaned)) {
+        document.getElementById('co-err-phone').textContent = 'Enter a valid phone number';
+        phone.classList.add('input-error');
+        valid = false;
+    }
+
+    return valid;
+}
+
+// ═══════════════════════════════════════
+//  PLACE ORDER
+// ═══════════════════════════════════════
+function placeOrder() {
+    const items = getCart();
+    if (items.length === 0) {
+        showToast('Your cart is empty!');
+        return;
+    }
+
+    if (!validateForm()) {
+        showToast('Please fill in all required fields');
+        return;
+    }
+
+    // Calculate final total
+    const subtotal = items.reduce((s, i) => s + (i.price * i.qty), 0);
+    const tax = Math.round(subtotal * 0.05);
+    const total = subtotal + tax;
+    const totalQty = items.reduce((s, i) => s + i.qty, 0);
+    const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
+    const payLabels = { cod: 'Cash on Delivery', card: 'Credit/Debit Card', upi: 'UPI Payment' };
+
+    // Generate order ID
+    const orderId = 'DB' + Date.now().toString().slice(-8);
+
+    // Build confirmation details
+    const detailsHtml = `
+        <div class="confirm-grid">
+            <div class="confirm-block">
+                <span class="confirm-label">Order ID</span>
+                <span class="confirm-value">#${orderId}</span>
+            </div>
+            <div class="confirm-block">
+                <span class="confirm-label">Items</span>
+                <span class="confirm-value">${totalQty} bed${totalQty > 1 ? 's' : ''}</span>
+            </div>
+            <div class="confirm-block">
+                <span class="confirm-label">Total Paid</span>
+                <span class="confirm-value highlight">₹${total.toLocaleString('en-IN')}</span>
+            </div>
+            <div class="confirm-block">
+                <span class="confirm-label">Payment</span>
+                <span class="confirm-value">${payLabels[paymentMethod]}</span>
+            </div>
+        </div>
+    `;
+    document.getElementById('confirmed-details').innerHTML = detailsHtml;
+
+    // Clear cart
+    localStorage.removeItem('dreambedsCart');
+
+    // Show confirmed, hide checkout
+    document.getElementById('checkout-main').style.display = 'none';
+    document.querySelector('.checkout-progress:not(.confirmed-progress)').style.display = 'none';
+    document.getElementById('order-confirmed').style.display = 'block';
+
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    showToast('🎉 Order placed successfully!');
+}
+
+// ═══════════════════════════════════════
+//  TOAST
+// ═══════════════════════════════════════
+function showToast(msg) {
+    const toast = document.getElementById('toast');
+    if (!toast) return;
+    toast.textContent = msg;
+    toast.style.opacity = '1';
+    toast.style.transform = 'translateX(-50%) translateY(0)';
+    clearTimeout(toast._timer);
+    toast._timer = setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateX(-50%) translateY(20px)';
+    }, 3000);
+}
+
+// ═══════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+    renderSummary();
+    setupPaymentToggle();
+
+    document.getElementById('place-order-btn').addEventListener('click', placeOrder);
+
+    // Header shadow on scroll
+    window.addEventListener('scroll', () => {
+        const header = document.querySelector('header');
+        if (header) {
+            header.style.boxShadow = window.scrollY > 10
+                ? '0 4px 24px rgba(92,61,46,0.1)'
+                : 'none';
+        }
+    });
+});
+</script>
+
+</body>
+</html>
